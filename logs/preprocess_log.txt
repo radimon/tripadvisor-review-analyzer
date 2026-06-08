@@ -1,0 +1,51 @@
+﻿
+=======================================================
+Processing: reviews_The_Cat_Cabinet.csv
+=======================================================
+  原始筆數: 479
+  原始欄位: ['rating', 'text', 'date', 'trip_type']
+  Rating 分佈: {5: 157, 4: 160, 3: 95, 2: 34, 1: 33}
+  日期解析: date_with_label=319, date_only=144, unknown_format=16
+  [OK] 清理後筆數: 479
+  [OK] 已儲存至: The_Cat_Cabinet_clean.csv
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 479 entries, 0 to 478
+Data columns (total 5 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   rating       479 non-null    int64 
+ 1   text         479 non-null    object
+ 2   date         479 non-null    object
+ 3   trip_type    319 non-null    object
+ 4   date_status  479 non-null    object
+dtypes: int64(1), object(4)
+memory usage: 18.8+ KB
+
+=======================================================
+Processing: reviews_StoneGrill_1870-Amsterdam.csv
+=======================================================
+  原始筆數: 1526
+  原始欄位: ['rating', 'text', 'date', 'trip_type']
+  Rating 分佈: {5: 1339, 4: 98, 3: 55, 2: 20, 1: 14}
+  日期解析: date_with_label=1480, date_only=35, unknown_format=11
+  [OK] 清理後筆數: 1526
+  [OK] 已儲存至: StoneGrill_1870_clean.csv
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1526 entries, 0 to 1525
+Data columns (total 5 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   rating       1526 non-null   int64 
+ 1   text         1526 non-null   object
+ 2   date         1526 non-null   object
+ 3   trip_type    1480 non-null   object
+ 4   date_status  1526 non-null   object
+dtypes: int64(1), object(4)
+memory usage: 59.7+ KB
+
+=======================================================
+DONE — 兩份清理後的檔案：
+  The_Cat_Cabinet_clean.csv  →  479 筆, 欄位: ['rating', 'text', 'date', 'trip_type', 'date_status']
+  StoneGrill_1870_clean.csv  →  1526 筆, 欄位: ['rating', 'text', 'date', 'trip_type', 'date_status']

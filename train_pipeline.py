@@ -5,6 +5,7 @@ TripAdvisor Sentiment Analysis - Full Pipeline
 """
 
 import os
+import joblib
 import pandas as pd
 import numpy as np
 from dotenv import load_dotenv
@@ -15,13 +16,19 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import warnings
 warnings.filterwarnings("ignore")
 
+# ──────────────────────────────────────────────
+# 模型儲存目錄
+# ──────────────────────────────────────────────
+MODELS_DIR = "saved_models"
+os.makedirs(MODELS_DIR, exist_ok=True)
+
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # ──────────────────────────────────────────────
 # 0. Load & Prepare Data
 # ──────────────────────────────────────────────
-df = pd.read_csv("mining_data_clean.csv")
+df = pd.read_csv("data/clean/mining_data_clean.csv")
 
 label_map = {"負面": 0, "中立": 1, "正面": 2}
 id2label  = {0: "負面", 1: "中立", 2: "正面"}
@@ -68,6 +75,11 @@ f1_lr = f1_score(y_test, y_pred_lr, average="macro")
 print(f"Macro-F1: {f1_lr:.4f}")
 print(classification_report(y_test, y_pred_lr, target_names=["負面","中立","正面"]))
 results["TF-IDF + LR"] = f1_lr
+
+# 儲存 TF-IDF 向量化器與 LR 模型
+joblib.dump(tfidf, os.path.join(MODELS_DIR, "tfidf_vectorizer.pkl"))
+joblib.dump(lr,    os.path.join(MODELS_DIR, "lr_classifier.pkl"))
+print(f"  → 模型已儲存至 {MODELS_DIR}/tfidf_vectorizer.pkl & lr_classifier.pkl")
 
 # ──────────────────────────────────────────────
 # 3 & 4. RoBERTa Fine-tune
@@ -161,13 +173,19 @@ def train_roberta(use_class_weights=False, run_name="RoBERTa"):
     f1 = f1_score(all_labels, all_preds, average="macro")
     print(f"\n  Macro-F1: {f1:.4f}")
     print(classification_report(all_labels, all_preds, target_names=["負面","中立","正面"]))
-    return f1, model
+    return f1, model, tokenizer
 
-f1_rob, _          = train_roberta(use_class_weights=False, run_name="3. RoBERTa (no weight)")
+f1_rob, _, _             = train_roberta(use_class_weights=False, run_name="3. RoBERTa (no weight)")
 results["RoBERTa (no weight)"] = f1_rob
 
-f1_rob_w, model_best = train_roberta(use_class_weights=True, run_name="4. RoBERTa (weighted) ← 改進方法")
+f1_rob_w, model_best, tokenizer_best = train_roberta(use_class_weights=True, run_name="4. RoBERTa (weighted) ← 改進方法")
 results["RoBERTa (weighted) ★"] = f1_rob_w
+
+# 儲存 RoBERTa (weighted) 模型與 tokenizer
+roberta_save_path = os.path.join(MODELS_DIR, "roberta_weighted")
+model_best.save_pretrained(roberta_save_path)
+tokenizer_best.save_pretrained(roberta_save_path)
+print(f"  → RoBERTa (weighted) 已儲存至 {roberta_save_path}/")
 
 # ──────────────────────────────────────────────
 # 5. 諷刺/刷星偵測
@@ -211,6 +229,7 @@ for _, row in inconsistent_df.head(5).iterrows():
     print(f"  \"{str(row['text'])[:120]}...\"")
     print()
 
+'''
 # ──────────────────────────────────────────────
 # 6. LLM 摘要生成（GPT-5.4-mini）
 # ──────────────────────────────────────────────
@@ -284,3 +303,4 @@ for name, score in results.items():
     print(f"  {name:35s}: {score:.4f}{marker}")
 
 print(f"\n諷刺偵測: 疑似刷星評論佔 {inconsistent/total*100:.1f}% ({inconsistent}/{total} 筆)")
+'''

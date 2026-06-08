@@ -1,0 +1,43 @@
+﻿=== The Cat Cabinet ===
+shape: (479, 6)
+columns: ['reviewer', 'rating', 'title', 'text', 'date', 'trip_type']
+dtypes:
+reviewer     float64
+rating        object
+title        float64
+text          object
+date          object
+trip_type    float64
+dtype: object
+nulls:
+reviewer     479
+rating         0
+title        479
+text           0
+date           0
+trip_type    479
+dtype: int64
+rating sample: {'4 of 5 bubbles': 160, '5 of 5 bubbles': 157, '3 of 5 bubbles': 95, '2 of 5 bubbles': 34, '1 of 5 bubbles': 33}
+date sample: ['Apr 2026 ‧ Solo', 'Apr 2026 ‧ Friends', 'Feb 2026 ‧ Couples', 'Feb 2026', 'Jan 2026']
+
+=== StoneGrill 1870 ===
+shape: (1526, 6)
+columns: ['reviewer', 'rating', 'title', 'text', 'date', 'trip_type']
+dtypes:
+reviewer     float64
+rating        object
+title         object
+text          object
+date          object
+trip_type    float64
+dtype: object
+nulls:
+reviewer     1526
+rating          0
+title          13
+text            0
+date            0
+trip_type    1526
+dtype: int64
+rating sample: {'5 of 5 bubbles': 1339, '4 of 5 bubbles': 98, '3 of 5 bubbles': 55, '2 of 5 bubbles': 20, '1 of 5 bubbles': 14}
+date sample: ['May 2026\xa0‧\xa0Friends', 'Sep 2025\xa0‧\xa0Couples', 'May 2026\xa0‧\xa0Friends', 'May 2026\xa0‧\xa0Friends', 'May 2026\xa0‧\xa0Business']

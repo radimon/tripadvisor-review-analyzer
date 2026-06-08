@@ -1,0 +1,24 @@
+﻿
+讀取: data/clean/The_Cat_Cabinet_clean.csv  (479 筆)
+
+[1/1] TF-IDF + LR 預測 ...
+  載入 TF-IDF + LR 模型 ...
+
+  [TF-IDF + LR] 預測分佈 (共 479 筆)
+  ────────────────────────────────────────
+  負面:  106 筆 ( 22.1%)
+  中立:  108 筆 ( 22.5%)
+  正面:  265 筆 ( 55.3%)
+  ────────────────────────────────────────
+  疑似刷星（4~5星但負/中立）: 88 筆 (18.4%)
+
+結果已儲存至: data/clean/The_Cat_Cabinet_predicted.csv
+
+前 5 筆疑似刷星評論：
+  [4星 | 預測:負面] Personally, I really enjoyed the place. It is entirely dedicated to cats, through artworks and artis...
+  [5星 | 預測:負面] Dog-lovers will probably not get much out of the Katten Kabinet.Cat-lovers, by contrast, should arra...
+  [4星 | 預測:中立] Good fun I’d you’ve done the Rijksmuseum, the Van Gogh or MOCO but there’s not much in there to keep...
+  [4星 | 預測:中立] A special museum. Not only because you enter such a stately canal house, but also the reason for thi...
+  [5星 | 預測:中立] You can enjoy antiques and posters related to cats. While the exhibition isn't very large, it's unde...
+
+Done.
